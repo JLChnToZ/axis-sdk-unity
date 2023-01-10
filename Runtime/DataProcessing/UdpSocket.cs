@@ -61,9 +61,9 @@ namespace Axis.Communication
             remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), txPort);
 
             // Create local client
-            client = new UdpClient();
+            client = new UdpClient { ExclusiveAddressUse = false };
             client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-            client.Client.Bind(remoteEndPoint); // Bind after setting reuse option.
+            client.Client.Bind(new IPEndPoint(IPAddress.Any, rxPort)); // Bind after setting reuse option.
             
             // Create a new thread for reception of incoming messages
             receiveThread = new Thread(new ThreadStart(ReceiveData));
