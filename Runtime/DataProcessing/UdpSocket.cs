@@ -61,8 +61,9 @@ namespace Axis.Communication
             remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), txPort);
 
             // Create local client
-            client = new UdpClient(rxPort);
+            client = new UdpClient();
             client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            client.Client.Bind(remoteEndPoint); // Bind after setting reuse option.
             
             // Create a new thread for reception of incoming messages
             receiveThread = new Thread(new ThreadStart(ReceiveData));
@@ -101,7 +102,11 @@ namespace Axis.Communication
                 {
                     if(err is ThreadAbortException)
                     {
-                        
+                        break;
+                    } else if(err is ObjectDisposedException)
+                    {
+                        // This might happen when application built with IL2CPP exits.
+                        break;
                     } else
                     {
                         
