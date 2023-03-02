@@ -69,10 +69,10 @@ namespace Axis.Elements.AnimatorLink
                             rightDirectionForArm = Animator.transform.InverseTransformDirection(-nodeTransform.forward);
 
                         }
-                        else if (limb == NodeBinding.LeftFoot)
+                        else if (limb == NodeBinding.LeftFoot || limb == NodeBinding.RightFoot)
                         {
-                            upDirectionForArm = Animator.transform.InverseTransformDirection(nodeTransform.up);
-                            rightDirectionForArm = Animator.transform.InverseTransformDirection(-nodeTransform.forward);
+                            upDirectionForArm = Animator.transform.InverseTransformDirection(-nodeTransform.up);
+                            rightDirectionForArm = Animator.transform.InverseTransformDirection(nodeTransform.forward);
                         }
 
                         else
