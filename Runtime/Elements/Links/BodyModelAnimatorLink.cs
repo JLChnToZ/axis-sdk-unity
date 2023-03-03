@@ -71,8 +71,8 @@ namespace Axis.Elements.AnimatorLink
                         }
                         else if (limb == NodeBinding.LeftFoot || limb == NodeBinding.RightFoot)
                         {
-                            upDirectionForArm = Animator.transform.InverseTransformDirection(-nodeTransform.up);
-                            rightDirectionForArm = Animator.transform.InverseTransformDirection(nodeTransform.forward);
+                            upDirectionForArm = Animator.transform.InverseTransformDirection(nodeTransform.forward);
+                            rightDirectionForArm = Animator.transform.InverseTransformDirection(-nodeTransform.up);
                         }
 
                         else
